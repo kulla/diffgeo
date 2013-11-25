@@ -6,11 +6,457 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
 
 \newcommand{\N}{\mathbb N}
 \newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+
+\newtheorem*{mydef}{Definition}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{remark}{Remark}
+
+\parindent=0pt
 
 \begin{document}
 
+\section{Basic definitions}
+
+\begin{mydef}
+  A \emph{topological space} is a set $X$ with a collection of subsets $\mathcal O$, called \emph{open sets}, satisfying the following properties:
+	
+  \begin{enumerate}
+    \item $X,\emptyset \in \mathcal O$
+    \item $\forall i \in I: U_i \in \mathcal O \Rightarrow \bigcup_{i\in I} U_i \in \mathcal O$
+    \item $|I|<\infty \land \forall i \in I: U_i \in \mathcal O \Rightarrow \bigcap_{i\in I} U_i \in \mathcal O$
+  \end{enumerate}
+
+  $V$ is \emph{neighbourhood} of $p \in X$ $\Leftrightarrow \exists U \in \mathcal O : p\in U \subseteq V$. 
+\end{mydef}
+
+\begin{mydef}
+  $f:(X,\mathcal O_X) \rightarrow (Y,\mathcal O_Y) \text{ is continuous }\Leftrightarrow \forall U_Y \in \mathcal O_Y : f^{-1}(U_Y) \in O_X$
+\end{mydef}
+
+\begin{mydef}
+  A topological space has the \emph{Hausdorff property}, iff
+  
+  \begin{align}
+    \forall p,q\in X: \exists U,V \in \mathcal O_X: p \in U \land q \in V \land U\cap V = \emptyset
+  \end{align}
+\end{mydef}
+
+\begin{mydef}
+  A \emph{metric space} is a set $X$ with a map $d:X\times X \rightarrow \R^{+}_0$ such that the following hold
+
+  \begin{enumerate}
+  \item $d(p,q)=d(q,p)$
+  \item $d(p,q)=0 \Leftrightarrow p=q$
+  \item $d(p,q)\le d(p,r)+d(r,q)$
+  \end{enumerate}
+\end{mydef}
+
+\begin{lemma}
+  A metric space is always Hausdorff.
+\end{lemma}
+
+\begin{prop}
+  Every open set in $\R^n$ is a union of $B_\epsilon(x)$ for suitable $x\in \Q^n$ and $\epsilon\in \Q$.
+\end{prop}
+
+\begin{mydef}
+  A collection $\mathcal B\subseteq \mathcal O$ is called \emph{basis} for $\mathcal O$, iff
+
+  \begin{align}
+    \forall U \in \mathcal O \exists I: \left(\forall i \in I: U_i \in \mathcal B\right) \land U = \bigcup_{i\in I} U_i
+  \end{align}
+\end{mydef}
+
+\begin{mydef}
+  A map $f:X\rightarrow Y$ is a \emph{homeomorphism}, iff $f$ is bijective and $f$ and $f^{-1}$ are continuous.
+\end{mydef}
+
+\begin{mydef}
+  A topological space $(X,\mathcal O)$ is a \emph{topological space} (of dimension $n$), if it has the following three properties:
+
+  \begin{enumerate}
+  \item $X$ is locally homeomorphic to $\R^n$ (i.e. $X$ is locally Euclidean). This means:
+    \begin{align}
+      \forall p \in X: \exists \text{ open set } U \subseteq X: p\in U \land \left( \exists \phi: U \stackrel{\text{homeom.}}\longrightarrow \phi(U) \subseteq \R^n\right)
+    \end{align}
+
+    $(U,\phi)$ is a \emph{chart}
+  \item $X$ has Hausdorff property
+  \item $\mathcal O$ has countable basis
+  \end{enumerate}
+\end{mydef}
+
+\begin{mydef}
+  A \emph{transition map} between two charts $(U,\phi)$ and $(V,\psi)$ is the map $\psi\circ \phi^{-1}:\phi(U\cap V) \rightarrow \psi(U\cap V)$.
+\end{mydef}
+
+\begin{mydef}
+  A \emph{atlas} is a collection of charts $(U_i,\phi_i$) such that $\bigcup_{i\in I} U_i=X$
+\end{mydef}
+
+\begin{mydef}
+  A \emph{differential manifold} is a topological manifold with an atlas whose transition functions are differentiable.
+\end{mydef}
+
+\begin{mydef}
+  Let $X$ be a differentiable manifold. $f:X \rightarrow \R$ is \emph{differentiable} at $p\in X$, iff for some chart $(U,\phi)$ with $p\in U$ the composition $f\circ \phi^{-1}$ is differentiable at $\phi(p)$.
+
+  \begin{tikzpicture}
+    \matrix (m) [matrix of math nodes,row sep=3em,column sep=4em] {U & \R \\ \phi(U) & \\};
+    \path[-stealth]
+    (m-1-1) edge node [left]{$\phi$} (m-2-1)
+            edge node [above]{$f$} (m-1-2)
+    (m-2-1) edge node [right]{$f\circ \phi^{-1}$} (m-1-2);
+  \end{tikzpicture}
+\end{mydef}
+
+\begin{mydef}
+  A map $f: X \rightarrow Y$ between differentiable manifolds is differentiable at $p\in X$, iff there are charts $(U,\phi)$ of $X$ and $(V,\psi)$ of $Y$ with $p\in u$ and $f(p) \in V$ such that $\psi\circ f \circ \phi^{-1}$ is differentiable at $\phi(p)$.
+
+  \begin{tikzpicture}
+    \matrix (m) [matrix of math nodes,row sep=3em,column sep=6em] {U  \subseteq X& V  \subseteq Y\\ \phi(U)  \subseteq \R^n& \psi(V)\subseteq \R^m \\};
+    \path[-stealth]
+    (m-1-1) edge node [left]{$\phi$} (m-2-1)
+            edge node [above]{$f$} (m-1-2)
+    (m-1-2) edge node [right]{$\psi$} (m-2-2)
+    (m-2-1) edge node [below]{$\psi\circ f \circ \phi^{-1}$} (m-2-2);
+  \end{tikzpicture}
+\end{mydef}
+
+\begin{mydef}
+  Two differentiable atlases $\mathcal A_1$ and $\mathcal A_2$ are equivalent, iff $\mathcal A_1 \cup \mathcal A_2$ is a differentiable atlas.
+\end{mydef}
+
+\begin{mydef}
+  A differentiable structure on a topological manifold $X$ is an equivalence class of differentiable atlases.
+\end{mydef}
+
+\begin{remark}
+  Every equivalence class of atlases contains a maximal atlas, so a differentiable structure could be defined by a maximal atlas.
+\end{remark}
+
+Suppose ${(U_i,\phi_i)}_{i\in I}$ is a differentiable atlas for $X$. Define
+
+\begin{align}
+  \gamma_{ji} = \phi_j \circ \phi_i^{-1}
+\end{align}
+
+The transition maps $\gamma_{ji}$ satisfy
+
+\begin{enumerate}
+\item $\gamma_{ii}= \mathrm{id}$
+\item $\gamma_{ji}=\gamma_{ij}^{-1}$
+\item $\gamma_{ki}=\gamma_{kj}\circ \gamma_{ji}$
+\end{enumerate}
+
+From the open sets $U_i$ and $\gamma_{ji}$ one can reconstruct $X$:
+
+\begin{align}
+  X = \{ (p,U_i) : p \in U_i \}/{\sim}
+\end{align}
+
+with
+
+\begin{align}
+  (p,U_i) \sim (q,U_j) \Leftrightarrow p \in \operatorname{dom}(\gamma_{ji}) \land \gamma_{ji}(p)=q
+\end{align}
+
+\begin{mydef}
+  For a differentiable map $f:\R^{n+1}\rightarrow\R$ a number $c\in\R$ is a \emph{regular value} of $f$, iff $\forall p\in \R^{n+1}: f(p)=c \Rightarrow D_p f \ne 0$
+\end{mydef}
+
+\begin{mydef}
+  For a differentiable map $f:\R^{n+q}\rightarrow\R^q$ a vector $c\in\R^q$ is a \emph{regular value} of $f$, iff $\forall p\in \R^{n+q}: f(p)=c \Rightarrow D_p f \text{ is surjective}$
+\end{mydef}
+
+\begin{thm}[Implicit function theorem]
+  If $c$ is a regular value, then $f^{-1}(c)$ is a differentiable manifold.
+\end{thm}
+
+\section{The tangent bundle}
+
+\begin{mydef}
+  Let $X$ is diff. manifold ans $\mathcal A={(U_i,\phi_i)}_{i\in I}$ diff. atlas for $X$. The \emph{tangent bundle} $TX$ of $X$ is the set $\{(p,i,v):p\in U_i, i\in I, v \in \R^n\}/{\sim}$ with
+
+  \begin{align}
+    (p,i,v)\sim(q,j,w)\Leftrightarrow p=q \land D_{\phi_i(p)}(\phi_j\circ \phi_i^{-1})(v)=w
+  \end{align}
+\end{mydef}
+
+\begin{remark}
+  $\pi: TX \rightarrow X : [(p,i,v)]\rightarrow p$ is well defined
+\end{remark}
+
+\begin{itemize}
+\item $T_A X = \pi^{-1}(A)$
+\item $T_p X=\pi^{-1}(p)$ (tangent space to $X$ at $p$)
+\end{itemize}
+
+\begin{mydef}
+  $T\phi_i: TU_i \rightarrow \phi_i(U_i) \times \R^n : [(p,i,v)] \mapsto (\phi_i(p),v)$
+\end{mydef}
+
+\begin{mydef}[Topology on $TX$]
+  $TX$ has the finest such that topology:
+
+  \begin{itemize}
+  \item every $TU_i$ is open
+  \item every $T\phi_i$ is a homeomorphism
+  \end{itemize}
+\end{mydef}
+
+\begin{prop}
+  $TX$ is diff. manifold with atlas $\{(TU_I, T\phi_i)\}$ of dimension $2n$
+\end{prop}
+
+\begin{prop}
+  $\pi:TX\rightarrow X$ is diff. map
+\end{prop}
+
+\begin{mydef}
+  For diff. map $f:M\rightarrow N$ we define $Df:TM\rightarrow TN$ by
+
+  \begin{align}
+    Df[(p,i,v)] = [(f(p),j, D_{\phi_i(p)}(\phi_j \circ f \circ \phi_i^{-1}))]
+  \end{align}
+
+  for charts $(U_i,\phi_i)$ for $M$ and $(U_j,\phi_j)$ for $N$ with $p\in U_i$ and $f(p)\in U_j$.
+
+  \tikzset{node distance=2cm,auto}
+
+  \begin{tikzpicture}
+    \node (1) {$TU_i$};
+    \node (2)[right of=1, node distance=5cm] {$TU_j$};
+    \node (3)[below of=1] {$\phi_i(U_i)\times\R^n$};
+    \node (4)[below of=2] {$\phi_j(U_j)\times\R^m$};
+    \node (5)[below of=3, node distance=0.5cm] {$[(p,i,v)]$};
+    \node (6)[right of=5, node distance=5cm] {$[(f(p),j,D_{\phi_i(p)}(\phi_j \circ f \circ \phi_i^{-1}))]$};
+    \draw[->] (1) to node {$Df$} (2);
+    \draw[->] (1) to node {$T\phi_i$} (3);
+    \draw[->] (2) to node {$T\phi_j$} (4);
+    \draw[|->] (5) to node {} (6);
+  \end{tikzpicture}
+
+  It is $\pi_N \circ Df = f \circ \pi_M$.
+\end{mydef}
+
+\section{Vector bundles}
+
+\begin{mydef}
+  A diff. \emph{vector bundle} of rank $k$ over a diff. manifold $M$ of dimension $n$ is the following:
+
+  \begin{enumerate}
+  \item a diff. manifold $E$ of dimension $n+k$
+  \item a diff. surjective map $\pi:E\rightarrow M$, such that 
+    \begin{enumerate}
+    \item $pi$ is locally trivial in the sense that $M$ can be covered by open sets $U$ which admit commutative diagram
+
+      \begin{tikzpicture}[node distance=3cm,auto]
+        \node (1) {$\pi^{-1}(U)$};
+        \node (2) [right of=1] {$U\times\R^k$};
+        \node (3) [below of=1] {$U$};
+        \draw[->] (1) to node {$\psi$} (2);
+        \draw[->] (1) to node {$\pi$} (3);
+        \draw[->] (3) to node {$\pi_1$} (2);
+      \end{tikzpicture}
+    \item The fibres $E_p = \pi^{-1}(p)$ are vector spaces over $\R$ of dimension $k$ so that if $p\in U$, then
+
+      \begin{align}
+        \psi|_{E_p} : E_p \rightarrow \{p\}\times\R^k
+      \end{align}
+
+      is an isomorphism of vector spaces.
+    \end{enumerate}
+  \end{enumerate}
+\end{mydef}
+
+Terminology:
+
+\begin{itemize}
+\item $E$: total space
+\item $M$: base space
+\item $E_p$: fiber of $E$ over $p$
+\item $U$ as in (a): trivializing open set of $E$
+\item $\psi$ as in (a): local trivialization for $E$
+\end{itemize}
+
+\subsection{Vector bundle homomorphism}
+
+\begin{mydef}
+  A \emph{homomorphism} between vector bundles $E\rightarrow M$ and $F\rightarrow M$ is a differential map $\lambda: E\rightarrow F$, such that the following diagram commutes
+
+  \begin{tikzpicture}[node distance=3cm,auto]
+    \node (1) {$E$};
+    \node (2) [right of=1] {$F$};
+    \node (3) [below of=1] {$M$};
+    \draw[->] (1) to node {$\lambda$} (2);
+    \draw[->] (1) to node {$\pi_E$} (3);
+    \draw[->] (2) to node {$\pi_F$} (3);
+  \end{tikzpicture}
+
+  and $\lambda|_{E_p}:E_p \rightarrow F_p$ is a linear map. $\lambda$ is an \emph{isomorphism}, iff $\lambda_p:=\lambda|_{E_p}$ is an isomorphism between vector spaces for all $p \in M$.
+\end{mydef}
+
+\begin{mydef}
+  A vector bundle $\pi:E\rightarrow M$ is \emph{globally trivial}, iff it is isomorph to $M\times \R^k$.
+\end{mydef}
+
+\subsection{Sections}
+
+\begin{mydef}
+  A \emph{section} of a vector bundle $\pi:E\rightarrow M$ is a diff. map $s:M\rightarrow E$ such that $\pi\circ s = \operatorname{id}$.
+\end{mydef}
+
+\begin{mydef}
+  $\Gamma(E)$ is the set of all sections of $E$.
+\end{mydef}
+
+\begin{mydef}
+  The zero section is the map $s_0:M\rightarrow E: p \mapsto 0\in E_p$.
+\end{mydef}
+
+\begin{prop}
+  A vector bundle $\pi:E\rightarrow M$ of rank $k$ is trivial, iff it admits $k$ sections $s_1\ldots s_k$ which are pointwise linearly independent.
+\end{prop}
+
+\begin{mydef}
+  A diff. manifold $M$ is \emph{parallelizable}, iff $TM$ is trivial.
+\end{mydef}
+
+\subsection{Cocycles}
+
+\begin{mydef}
+  $\gamma_{ij}:U_i\cap U_j\rightarrow GL_K(\R)$ is defined by
+
+  \begin{tikzpicture}[node distance=3cm,auto]
+    \node (1) {$\pi^{-1}(U_i \cap U_j)$};
+    \node (2) [below of=1] {$(U_i\cap U_j)\times\R^k$};
+    \node (3) [right of=2,node distance=6cm] {$(U_i\cap U_j)\times\R^k$};
+    \node (4) [below of=2,node distance=0.75cm] {$(p,v)$};
+    \node (5) [below of=3,node distance=0.75cm] {$(p,\gamma_{ij}(p)(v))$};
+    \draw[->] (1) to node {$\phi_i$} (2);
+    \draw[->] (1) to node {$\phi_j$} (3);
+    \draw[|->] (4) to node {$\phi_j\circ\phi_i^{-1}$} (5);
+  \end{tikzpicture}
+\end{mydef}
+
+Properties of $\gamma_{ij}$:
+
+\begin{enumerate}
+\item $\gamma_{ii}(p) = \operatorname{id}_{\R^k}$
+\item $\gamma_{ij}(p) = \gamma_{ji}^{-1}$
+\item $\gamma_{ik}(p) = \gamma_{ij}(p) \gamma_{jk}(p)$
+\end{enumerate}
+
+From $\{\gamma_{ij}:i,j\in I\}$ one can reconstruct $E$ by
+
+\begin{align}
+  E = \{ (p,i,v) : p\in U_i, i\in I, v\in \R^k\}/{\sim}
+\end{align}
+
+with
+
+\begin{align}
+  (p,i,v) \sim (q,j,w) \Leftrightarrow p = q \land \gamma_{ji}(p)(v) = w
+\end{align}
+
+and
+
+\begin{align}
+  \pi: E\rightarrow M : [(p,i,v)] \mapsto p
+\end{align}
+
+\subsection{Dual bundles}
+
+\begin{mydef}
+  For a vector bundle $E$ with cocycles $\gamma_{ij}$ the \emph{dual bundle} $E^*$ is the vector bundle defined by the cocycles $\gamma_{ij}^*$.
+\end{mydef}
+
+\subsection{Whitney sum}
+
+\begin{mydef}
+  Let $\pi_E:E\Rightarrow M$ and $\pi_F : F \rightarrow M$ be two vector bundles of dimension $k$ and $l$. The \emph{Whitney sum} $E \oplus F$ is a rank $k+l$ dimensional vector bundle with fibres $E_p \oplus F_p$. Let be $\{\gamma_{ij}\}_{i,j\in I}$ and $\{\delta_{ij}\}_{i,j\in I}$ cocycles of simultaneously covering trivializations of $E$ and $F$. The cocycles $\gamma_{ij} \oplus \delta_{ij}$ of $E\oplus F$ are defined by
+
+  \begin{align}
+    \gamma_{ij}\oplus\delta_{ij} = \left(\begin{matrix}\gamma_{ij} & 0 \\ 0 & \delta_{ij}\end{matrix}\right)
+  \end{align}
+\end{mydef}
+
+\subsection{Subbundles}
+
+\begin{mydef}
+  $G\subseteq E$ is a subbundle of $E$, iff the inclusion $\operatorname{id}|_G:G\rightarrow E$ is a linear map of vector bundles.
+\end{mydef}
+
+\subsection{Structure on vector bundles}
+
+\begin{mydef}
+  A \emph{$G$-structure} on a rank $k$ vector bundle $\pi:E\rightarrow M$ is a system of local trivializations such that the corresponding cocycle $\gamma_{ij}$ takes values in $G$.
+\end{mydef}
+
+\begin{mydef}
+  A rank $k$ vector bundle $E$ is called \emph{orientable}, iff it admits a $GL_k^{+}(\R)$-structure.
+\end{mydef}
+
+\section{Partition of unity}
+
+\begin{mydef}
+  An open covering $\{U_i\}_{i\in I}$ of $X$ has a locally finite refinement $\{V_j\}_{j\in J}$, iff
+
+  \begin{itemize}
+  \item $\forall j\in J\,\exists i\in I:V_j\subseteq U_i$
+  \item $\forall x\in X\,\exists N_x: N_x\text{ is neighbourhood of }x \land |\{j\in J: V_j\cap N_x\ne\emptyset\}|<\infty$
+  \end{itemize}
+\end{mydef}
+
+\begin{thm}
+  Let $M$ be a diff. manifold. For every covering $\{U_i\}_{i\in I}$ of $M$ there is an atlas $\{(V_k,\phi_k)\}_{k\in K}$ such that the covering by the $V_k$ is a locally finite replacement of the covering by the $U_i$ and such that $\phi_k(V_k)=B_3(0)\subseteq \R^n$ and the open sets $W_k=\phi_k^{-1}(B_1(0))$ cover $M$.
+\end{thm}
+
+\begin{prop}
+  Every diff. manifold is paracompact (every open covering has a locally finite refinement).
+\end{prop}
+
+\begin{mydef}
+  $\operatorname{supp}(f) := \overline{\{p\in \operatorname{dom}(f):f(p)\ne 0\}}$
+\end{mydef}
+
+\begin{mydef}
+  Let $M$ be a diff. manifold. A \emph{(diff.) partition of unity} is a collection of diff. functions $\rho_i:M\rightarrow \R$ with the following properties
+
+  \begin{enumerate}
+  \item Each $\rho_i$ is non-negative
+  \item $\{\operatorname{supp}(\rho_i)\}_{i\in I}$ are locally finite
+  \item $\forall p\in M: \sum_{i\in I} \rho_i(p) = 1$
+  \end{enumerate}
+
+  $\{\rho_i\}_{i\in I}$ is subordinate to an open covering $\{U_k\}_{k\in K}$, iff
+
+  \begin{align}
+   \forall i \in I\,\exists k\in K: \operatorname{supp}(\rho_i)\subseteq U_k
+  \end{align}
+\end{mydef}
+
+\begin{thm}
+  Let $M$ be a diff. manifold and $\{U_i\}_{i\in I}$ an open covering of $M$. Then there exists a subordinate diff. partition of unity.
+\end{thm}
+
+\section{Metric}
+
+\begin{mydef}
+  A \emph{metric} on a vector bundle $\pi:E\rightarrow M$ is a fiberwise positive definite scalar product that is smooth in the following sense: $\forall s_1,s_2\in \Gamma(E): \langle s_1,s_2 \rangle \in C^\infty(M)$.
+\end{mydef}
+
+\begin{prop}
+  $\langle \cdot, \cdot \rangle$ is smooth, iff it is given in local trivializations by matrices with smooth functions.
+\end{prop}
 
 \end{document}
