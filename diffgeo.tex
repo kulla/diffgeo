@@ -481,4 +481,71 @@ and
   Every diff. manifold of dimension $n$ can be embedded in $\R^{2n+1}$.
 \end{thm}
 
+\section{Flows and vector fields}
+
+\begin{mydef}
+  A (global) flow on $M$ is a diff. map $\phi:\R\times M\rightarrow M: (t,x)\mapsto \phi_t(x)$. with the properties
+
+  \begin{itemize}
+  \item $\phi_0=\operatorname{id}$
+  \item $\phi_s \circ \phi_t=\phi_{s+t}$
+  \end{itemize}
+\end{mydef}
+
+\begin{mydef}
+  $x\in M$ is a \emph{fixed (or stationary point} of the flow $\phi$, iff $\forall t\in \R: \phi_t(x)=x$.
+\end{mydef}
+
+\begin{mydef}
+  Let $c:\R\rightarrow M$ be a diff. map (differential curve on $M$). For $t\in \R$ we define $\dot c(t):=D_t c \left(\tfrac d{dt}\right) \in T_{c(t)}M$. Here we identify $\R\times\R$ with $\R^2$ and $\tfrac d{dt}$ is the std. basis vector for $T_t \R$ for all $t\in \R$. $\dot c(t)$ is called the \emph{velocity} or \emph{speed vector} of $c$ at $t$ or at $c(t)$.
+\end{mydef}
+
+\begin{mydef}
+  For a flow $\phi$ and \emph{the orbit} of a point $x\in M$ is the map $c_x:\R\rightarrow M:t\mapsto \phi_t(x)$. It has the velocity vector $\dot c_x(t)=\tfrac d{dt} \phi_t(x)|_{t=0}:= D_0 \phi(x)\left(\tfrac d{dt}\right) \in T_{\phi_0(x)} M$ which depends smoothly on $x$. This defines a smooth vector field $X:M\rightarrow TM:x\mapsto X_x=\tfrac d{dt} \phi_t(x)|_{t=0}$.
+\end{mydef}
+
+\begin{lemma}
+  The flow $\phi$ preserves the vector field $X$ obtained by differntiating $\phi$:
+
+  \begin{align}
+    (D_x \phi_t)(X_x) = X_{\phi_t(x)} \in T_{\phi_t(x) M}
+  \end{align}
+\end{lemma}
+
+\begin{mydef}
+  A \emph{local flow} on $M$ is
+
+  \begin{enumerate}
+  \item an open covering $\{U_i\}_{i\in I}$ and $\epsilon_i>0$ for all $i\in I$
+  \item diff. maps $\phi_i:(-\epsilon_i,\epsilon_i)\times U_i \rightarrow M:(t,x)\mapsto \phi^i_z(x)$
+  \item $\forall i\in I: \phi^i_0 = \operatorname{id}$
+  \item $\forall i\in I: \phi^i_s\circ \phi^i_t = \phi^i_{s+t}$
+  \item all $\phi^i$ and $\phi^j$ agree on $((-\epsilon_i,\epsilon_i)\cap(-\epsilon_j,\epsilon_j))\times(U_i\cap U_j)$
+  \end{enumerate}
+\end{mydef}
+
+\begin{mydef}
+  Two local flows are equivalent, iff their union is a local flow.
+\end{mydef}
+
+\begin{lemma}
+  There is a bijective correspondence between equiv. classes of local flows and vector fields on $M$.
+\end{lemma}
+
+\begin{mydef}
+  A vector field is called \emph{complete}, iff it has a global flow.
+\end{mydef}
+
+\begin{lemma}
+  If $X$ admits a local flow with all $\epsilon_i$ equal to a fixed $\epsilon$, then $X$ admits a global flow.
+\end{lemma}
+
+\begin{prop}
+  If $\operatorname{supp}=\overline{\{p\in M:X_p\ne 0\}}$ is compact, then $X$ admits a global flow.
+\end{prop}
+
+\begin{prop}
+  If $M$ is compact, every vector field on $M$ is complete.
+\end{prop}
+
 \end{document}
