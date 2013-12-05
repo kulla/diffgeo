@@ -459,4 +459,26 @@ and
   $\langle \cdot, \cdot \rangle$ is smooth, iff it is given in local trivializations by matrices with smooth functions.
 \end{prop}
 
+\section{Submanifolds and embeddings}
+
+\begin{mydef}
+  A diff. map $f:M\rightarrow N$ is an \emph{immersion} iff $D_p f:T_p M\rightarrow T_p N$ is injective for all $p\in M$.
+\end{mydef}
+
+\begin{mydef}
+  A diff. map $f:M\rightarrow N$ is an \emph{embedding} iff it is injective, an immersion and proper (preimages of every compact set is compact).
+\end{mydef}
+
+\begin{mydef}
+  $N$ is a diff. manifold of dimension $n$. A subset $M\subseteq N$ is a submanifold of dimension $m$, iff for all $p\in M$. there is a neighbourhood $U\subseteq N$ and a diffeomorphism $\phi: U \rightarrow \R^n$ with $\phi(U\cap M)=\R^m \times 0 \subseteq \R^m\times\R^{n-m}$.
+\end{mydef}
+
+\begin{remark}
+  A subset $M\subseteq N$ is a submanifold, iff it is a manifold and the inclusion $i: M\rightarrow N$ is an embedding.
+\end{remark}
+
+\begin{thm}
+  Every diff. manifold of dimension $n$ can be embedded in $\R^{2n+1}$.
+\end{thm}
+
 \end{document}
