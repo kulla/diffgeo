@@ -548,4 +548,101 @@ and
   If $M$ is compact, every vector field on $M$ is complete.
 \end{prop}
 
+\begin{mydef}
+  The diff. vector field $X\in \mathfrak X(U)$ with $X_p=\sum_{i=1}^n x_i(p) \tfrac{\partial}{\partial x_i}$ acts on diff. function $f\in C^\infty(U)$ by
+
+  \begin{align}
+    (X\cdot f) (p) = \sum_{i=1}^n x_i(p) \frac{\partial f}{\partial x_i}
+  \end{align}
+\end{mydef}
+
+\section{Lie Derivatives}
+
+\begin{mydef}
+  The Lie derivative of $f\in C^\infty(M)$ in the direction $X$ defined by local flow $\phi_t$ is
+
+  \begin{align}
+    (L_X f)(p) = \lim_{t\rightarrow0}\frac{f(\phi_t(p))-f(p)}{t} = \frac d{dt} f(\phi_t(p))|_{t=0}
+  \end{align}
+\end{mydef}
+
+\begin{lemma}
+  $L_X f = X\cdot f$
+\end{lemma}
+
+\begin{mydef}
+  Let $A$ be an $\R$-algebra. A map $D:A\rightarrow A$ is a \emph{derivation}, iff
+
+  \begin{itemize}
+  \item $D$ is $\R$-linear map
+  \item $D(f\cdot g) = D(f)\cdot g + f \cdot D(f)$
+  \end{itemize}
+\end{mydef}
+
+\begin{prop}
+  The Lie derivation is an isomorphism of vector spaces: $\mathfrak X(M) \rightarrow \mathrm{Der}(C^\infty(M)): X \mapsto (L_X: f \mapsto L_X f = X\cdot f)$
+\end{prop}
+
+\begin{mydef}
+  $[L_X,L_Y]:=L_XL_Y-L_YL_X\in \mathrm{Der}(C^\infty(M))$ 
+\end{mydef}
+
+\begin{mydef}
+  $[X,Y]$ is the unique vector field satisfying $L_{[X,Y]}=L_XL_Y-L_YL_X$.
+\end{mydef}
+
+\begin{prop}
+  $[\cdot,\cdot]$ has the following properties
+
+  \begin{itemize}
+  \item $[\cdot,\cdot]$ is $\R-linear$
+  \item $[X,Y]=-[Y,X]$
+  \item $[[X,Y],Z]+[[Z,X],Y]+[[Y,Z],X]=0$
+  \end{itemize}
+
+  $\mathfrak X(M)$ equipped with $[\cdot,\cdot]$ is a Lie-algebra.
+\end{prop}
+
+\begin{mydef}
+  Let $G$ be a Lie group. For any $g\in G$ we define $l_g:G\rightarrow G: p \mapsto g\cdot p$.
+\end{mydef}
+
+\begin{mydef}
+  A vector field $X\in \mathfrak X(G)$ is left invariant, iff $\forall g,p\in G: D l_g(X_p) = X_{g\cdot p}$
+\end{mydef}
+
+\begin{mydef}
+  $\mathcal G := \{ X\in \mathfrak X(G): X \text{ is left-invariant}\}$ is the \emph{Lie algebra of $G$}
+\end{mydef}
+
+\begin{prop}
+  Properties of $Lie-algebra$:
+
+  \begin{itemize}
+  \item $\mathcal G \subseteq \mathfrak X(G)$
+  \item $[\mathcal G,\mathcal G] \subseteq \mathcal G$
+  \item $\operatorname{dim} \mathcal G = \operatorname{dim} G$
+  \end{itemize}
+\end{prop}
+
+\begin{mydef}
+  \emph{Lie derivative} of $Y$ in the direction of $X$ with the local flow $\phi_t$ is defined by
+
+  \begin{align}
+    (L_X Y)(p) := \lim_{t\rightarrow0} \tfrac 1t (D_{\phi_t(p)}\phi_{-t}(Y_{\phi_t(p)})-Y_p)
+  \end{align}
+\end{mydef}
+
+\begin{thm}
+  $L_X Y = [X,Y]$
+\end{thm}
+
+\begin{prop}
+  Let $X$ and $Y$ be vector fields with local flows $\phi_t$ and $\psi_s$. We have
+
+  \begin{align}
+    [X,Y]=0 \Leftrightarrow \phi_t \text{ and } \psi_s \text{ commute}
+  \end{align}
+\end{prop}
+
 \end{document}
