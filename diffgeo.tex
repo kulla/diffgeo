@@ -795,4 +795,45 @@ and
   \end{itemize}
 \end{prop}
 
+\section{Integration on diff. forms}
+
+\begin{mydef}
+  For $\omega=f dx_1 \wedge \dots \wedge dx_n$ on $\R^n$ we define $\int_{\R^n} \omega = \int_{\R^n} f dx_1 \wedge \dots \wedge dx_n$.
+\end{mydef}
+
+\begin{prop}
+  For any diffeomorphism $\phi:\R^n\rightarrow\R^n$ we have 
+
+  \begin{align}
+    \int_{\R^n} \phi^*\omega = \int_{\R^n} (f\circ \phi) \operatorname{det}(\phi) dy_1 \wedge \dots dy_n
+  \end{align}
+\end{prop}
+
+\begin{mydef}
+  A diff. manifold $M$ is orientable, iff it has an atlas $\{(U_i,\phi_i)\}$  such that all transition maps are orientation-preserving (positive Jacobian determinant)
+\end{mydef}
+
+\begin{remark}
+  We have
+
+  \begin{itemize}
+  \item $M \text{ orientable} \Leftrightarrow TM\rightarrow M \text{ is orientable vector bundle}$
+  \item $M \text{ orientable} \Leftrightarrow \Lambda^n TM \text{ and } \Lambda^n T^*M are trivial rank 1 bundles$
+  \item $M \text{ orientable} \Leftrightarrow \exists w\in \Omega^n_0(M) \forall p\in M: \omega_p \ne 0$
+  \item $M \text{ orientable and connected} \Leftrightarrow M \text{ has precisely 2 orientation}$
+  \end{itemize}
+\end{remark}
+
+\begin{thm}
+  Let $M$ be an orientable diff. manifold of dimension $n$ with fixed orientation. Then there is a unique $\R$-linear functional $\int_M : \Omega_0^n(M) \rightarrow \R$ such that if $\operatorname{supp}(\omega)\subseteq U$ for domain $U$ of oriented chart $(U, \phi)$ then $\int_M \omega = \int_{\R^n}(\phi^{-1})^* \omega$.  
+\end{thm}
+
+\begin{remark}
+  $M$ is connected and oriented, denote by $\overline M$ the same manifold equipped with the other orientation.
+
+  \begin{align}
+    \int_{\overline M} \omega = - \int_M \omega
+  \end{align}
+\end{remark}
+
 \end{document}
