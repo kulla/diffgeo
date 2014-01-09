@@ -836,4 +836,38 @@ and
   \end{align}
 \end{remark}
 
+\section{Manifolds with boundary}
+
+\begin{mydef}
+  $\mathcal H^n = \{ (x_1,\dots,x_n) \in \R^n : x_n \ge 0\}$ and $\partial \mathcal H^n = \{ (x_1,\dots,x_n)\in \R^n: x_n = 0 \}$
+\end{mydef}
+
+\begin{mydef}
+  A diff. manifold with boundary is a diff. manifold with charts $\{(U_i,\phi_i)\}$ whose images are open sets in $\mathcal H^n$
+\end{mydef}
+
+\begin{lemma}
+  Let $U,V\subseteq \mathcal H^n$ be open sets and $\phi: U \rightarrow V$ be a diffeomophism. Then also $\phi: U \cap \partial H^n \rightarrow V \cap \partial H^n$ is a diffeomorphism. $\phi$ is orientable, iff $\phi|_{\partial H^n}$ is orientable.
+\end{lemma}
+
+\begin{lemma}
+  $M$ is orientable, iff $\partial M$ is orientable.
+\end{lemma}
+
+\begin{thm}[Stokes theorem]
+  If $M$ is an oriented diff. manifold with boundary of dimension $n$ and $c: \partial M \rightarrow M$ is the inclusion, then for every $\omega\in \Omega_0^{n-1}(M)$ we have
+
+  \begin{align}
+    \int_M d\omega = \int_{\partial M} c^* \omega
+  \end{align}
+\end{thm}
+
+\begin{prop}
+  $\partial M = \emptyset \land w\in \Omega_0^{n-1}(M) \Rightarrow \int_M d\omega = 0$
+\end{prop}
+
+\begin{prop}
+  If $M$ is an oriented manifold with boundary and $\mu \in \Omega^n(M)$ is nowhere zero, then $\mu \ne d\omega$ for any $\omega \in \Omega_0^{n-1}(M)$.
+\end{prop}
+
 \end{document}
