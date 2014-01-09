@@ -742,4 +742,57 @@ and
   \end{itemize}
 \end{prop}
 
+\begin{mydef}
+  $E\otimes F$ is the vector bundle defined by the cocycles $g_{ij}^E \otimes g_{ij}^F$. It has the fibres $E_x \otimes F_x$.
+\end{mydef}
+
+\begin{remark}
+  Each differential form $\omega$ can be represented at a point $p\in M$ by $\lambda_1 \wedge \lambda_2 \wedge \dots \wedge \lambda_k$ whereby $\lambda_{1\dots k}\in T_p M^*$. Thereby
+
+  \begin{align}
+    (\lambda_1 \wedge \dots \wedge \lambda_k)(X_1,\ldots,X_k)(p) = \operatorname{det}\left(\lambda_i\left(X_j(p)\right)\right)_{i,j}
+  \end{align}
+\end{remark}
+
+\begin{mydef}
+  The \emph{exterior derivative} $d$ on $M$ is a map $\Omega^k(M) \rightarrow \Omega^{k+1}(M)$ fulfilling the properties
+
+  \begin{enumerate}
+  \item $d$ is $\R$-linear
+  \item $df(X) = L_X f$
+  \item $d(\omega_1 \wedge \omega_2) = d\omega_1 \wedge \omega_2 + (-1)^{\mathrm{rng}(\omega_1)} \omega_1 \wedge \omega_2$
+  \item $d\circ d = 0$
+  \end{enumerate}
+\end{mydef}
+
+\begin{prop}
+  $\forall \lambda \in \Omega^1(M): d\lambda(X,Y) = L_X(\lambda(Y))-L_Y(\lambda(X))-\lambda([X,Y])$
+\end{prop}
+
+\begin{lemma}
+  $d\omega(p)$ only depends on the restriction of $\omega$ to an arbitrary open neighbourhood $U$ of $p$.
+\end{lemma}
+
+\begin{thm}
+  For every differential manifold there is a unique exteriour derivative.
+\end{thm}
+
+\begin{mydef}
+  Let $f:M\rightarrow N$ be differential map between diff. manifolds $M$ and $N$. For every $\omega\in \Omega^k(M)$ we define the pullback of $\omega$ by $f$ denoted by $f^* \omega\in \Omega^k(M)$ by
+
+  \begin{align}
+    f^*\omega (X_1,\ldots,X_k)(p) = \omega(f(p))(D_pf(X_1(p)),\ldots D_pf(X_k(p)))
+  \end{align}
+\end{mydef}
+
+\begin{prop}
+  $f*$ has the properties
+
+  \begin{itemize}
+  \item $f^*$ is $\R$-linear
+  \item $f^*(\omega_1 \wedge \omega_2) = f^*\omega_1 \wedge f^*\omega_2$
+  \item $f^* \circ d = d \circ f^*$
+  \end{itemize}
+\end{prop}
+
 \end{document}
